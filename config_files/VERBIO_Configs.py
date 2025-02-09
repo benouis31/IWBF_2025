@@ -5,7 +5,7 @@ class Config(object):
         self.kernel_size = 5
         self.stride = 1
 
-        self.num_classes = 16
+        self.num_classes = 55
         self.embed_dim = 64
 
         # training configs
