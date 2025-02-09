@@ -469,10 +469,10 @@ if __name__ == "__main__":
 
 
 
-    path_1a='/Users/mohamedbenouis/Documents/SWEET.hdf5'
-    path_1B= '/Users/mohamedbenouis/Desktop/notebooks/hci_project/dataset_1/VerBIO-norm.hdf5'
+   
+    path_1B= '/VerBIO-norm.hdf5'
     
-    path_1= '/Users/mohamedbenouis/Desktop/survey_work/wesad_FL/WESAD-norm.hdf5'
+    path_1= '/WESAD-norm.hdf5'
     selected_subjects = ['S1','S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15']
     
     
