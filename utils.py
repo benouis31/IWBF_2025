@@ -37,7 +37,7 @@ def train_epoch(model, train_loader, optimizer, train_mode, device, mask_ratio=0
         temp=x[:, :, 2]
         y = data[1].long().to(device)
             
-        if train_mode in ['supervised', 'linear_prob', 'finetune']:
+        if train_mode in ['supervised', 'frozen', 'fine-tuned']:
             #loss, pred = model.supervised_train_forward(x, y)
             loss, pred = model.supervised_train_forward(eda,bvp,temp, y)
         elif train_mode == 'ssl':
@@ -54,7 +54,7 @@ def train_epoch(model, train_loader, optimizer, train_mode, device, mask_ratio=0
         
         epoch_loss += loss.item()
         
-        if train_mode in ['supervised', 'linear_prob', 'finetune']:
+        if train_mode in ['supervised', 'frozen', 'fine-tuned']:
             _, predict_targets = torch.max(pred.detach().data, 1)
             epoch_acc += (predict_targets.cpu() == y.detach().cpu()).sum().float()/y.size(0)
         
