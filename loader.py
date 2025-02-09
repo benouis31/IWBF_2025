@@ -4,7 +4,6 @@ from torch.utils.data import Dataset
 from torch.utils.data import random_split
 import os
 import numpy as np
-#from augmentations import DataTransform
 
 import logging
 import pathlib
@@ -13,7 +12,6 @@ import h5py
 import torch
 import random
 from torch.utils.data.sampler import SubsetRandomSampler
-#from train_valid_loader import DataSplit
 from collections import Counter
 import numpy
 from sklearn.model_selection import train_test_split
@@ -43,8 +41,8 @@ verbio_subjects = ['P001', 'P003', 'P004', 'P005', 'P006', 'P007', 'P008',
 selected_subjects = ['S1','S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15']
 
 
-path_2= '/Users/mohamedbenouis/Desktop/notebooks/hci_project/dataset_1/VerBIO-norm.hdf5'
-path_1= '/Users/mohamedbenouis/Desktop/survey_work/wesad_FL/WESAD-norm.hdf5'
+path_2= '/VerBIO-norm.hdf5'
+path_1= '/WESAD-norm.hdf5'
 
 
    
@@ -56,10 +54,10 @@ def data_generator(path_1,path_2, configs, training_mode):
     # VerBIO: train and validation datasets
     # Pick random 5/55 subjects for validation and the rest for training set.
     
-    print(path_1)
+    #print(path_1)
     path_1= '/Users/mohamedbenouis/Desktop/survey_work/wesad_FL/WESAD-norm.hdf5'
-    print(path_1)
-    print(selected_subjects)
+    #print(path_1)
+    #print(selected_subjects)
   
     
     train_dataset = WESADDataset_Ba(path_1, configs,selected_subjects, mode="train")
