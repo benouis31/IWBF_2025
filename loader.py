@@ -51,13 +51,11 @@ path_1= '/WESAD-norm.hdf5'
 
 
 def data_generator(path_1,path_2, configs, training_mode):
-    # VerBIO: train and validation datasets
-    # Pick random 5/55 subjects for validation and the rest for training set.
+    # VerBIO path_2
+    # WESAD  path_1
     
-    #print(path_1)
-    path_1= '/Users/mohamedbenouis/Desktop/survey_work/wesad_FL/WESAD-norm.hdf5'
-    #print(path_1)
-    #print(selected_subjects)
+   
+   
   
     
     train_dataset = WESADDataset_Ba(path_1, configs,selected_subjects, mode="train")
