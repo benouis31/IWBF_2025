@@ -15,7 +15,8 @@ from einops.layers.torch import Rearrange
 
 
 
-
+##### Loss function self-supervised####
+'''
 class CustomLoss:
     def __init__(
             self,
@@ -159,7 +160,7 @@ class CustomLoss:
 
         return loss
     
-
+'''
 
 
 
@@ -303,7 +304,7 @@ class TMS_BIO(nn.Module):
     def __init__(self, configs):
         super(TMS_BIO, self).__init__()
 
-        # TCN parameters (assuming these are in configs)
+        # TCN parameters
         tcn_nfilters = configs.tcn_nfilters
         tcn_kernel_size = configs.tcn_kernel_size
         tcn_dropout = configs.tcn_dropout
@@ -419,12 +420,11 @@ class TMS_BIO(nn.Module):
             z = F.normalize(z, p=2)
             z_list.append(z)
            #z_list = z
-        contrastive_loss = 100 * self.inv_loss(z_list, z_avg)
-      #loss = contrastive_loss
+        mse_loss = 100 * self.inv_loss(z_list, z_avg)
         diversity_loss = self.tcr_loss(z_list)
-        loss = contrastive_loss + diversity_loss
+        loss = mse_loss + diversity_loss
 
-        return loss, contrastive_loss.item()
+        return loss, mse_loss.item()
 
     def random_masking(self, x, mask_ratio):
         N, L, D = x.shape # batch, length, dim
@@ -479,7 +479,7 @@ if __name__ == "__main__":
     print("Representation shape:", rep.shape)
 
     # SSL training forward pass
-    loss, contrastive_loss = model.ssl_train_forward(x1, x2, x3, mask_ratio=mask_ratio, num_masked=num_masked)
+    loss, mse_loss = model.ssl_train_forward(x1, x2, x3, mask_ratio=mask_ratio, num_masked=num_masked)
     print("SSL Loss:", loss)
-    print("Contrastive Loss:", contrastive_loss)
+    print("mse Loss:", mse_loss)
 
