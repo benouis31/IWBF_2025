@@ -15,7 +15,7 @@ import utils
 
 parser = argparse.ArgumentParser()
 
-#SEEDS = [25, 45, 65, 85, 105]
+#SEEDS = [25, 45, 65, 85, 105,56,10,55,90]
 SEEDS = [25]
 
 
