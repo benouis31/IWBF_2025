@@ -42,10 +42,10 @@ def train_epoch(model, train_loader, optimizer, train_mode, device, mask_ratio=0
             loss, pred = model.supervised_train_forward(eda,bvp,temp, y)
         elif train_mode == 'ssl':
             #loss, [contrastive_loss, constrain_loss] = model.ssl_train_forward(x, mask_ratio=mask_ratio, num_masked=num_masked)
-            loss, contrastive_loss = model.ssl_train_forward(eda,bvp,temp, mask_ratio=mask_ratio, num_masked=num_masked)
-            print('contrastive_loss',contrastive_loss)
-            epoch_contrastive_loss += contrastive_loss
-            #epoch_constrain_loss += constrain_loss
+            loss, mse_loss = model.ssl_train_forward(eda,bvp,temp, mask_ratio=mask_ratio, num_masked=num_masked)
+            print('MSE_Loss',mse_loss)
+            epoch_mse_loss += mse_loss
+          
             
         loss.backward()
         
@@ -61,9 +61,8 @@ def train_epoch(model, train_loader, optimizer, train_mode, device, mask_ratio=0
             train_loader.set_postfix(loss=epoch_loss/batch_idx, accuracy=epoch_acc/batch_idx, time = time.time()-start)
         
         if train_mode =='ssl':
-            train_loader.set_postfix(constrain_loss=epoch_contrastive_loss/batch_idx, time = time.time()-start)
+            train_loader.set_postfix(mse_loss=epoch_mse_loss/batch_idx, time = time.time()-start)
         
-            #train_loader.set_postfix(constrain_loss=epoch_constrain_loss/batch_idx, contrastive_loss=epoch_contrastive_loss/batch_idx, time = time.time()-start)
         
     return epoch_loss, epoch_acc
 
